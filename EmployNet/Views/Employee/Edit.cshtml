@@ -1,0 +1,110 @@
+﻿@model EmployeeDto
+
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <h2 class="text-center mb-5">Edit Employee</h2>
+
+        <form method="post">
+            <!-- Hidden ID field -->
+            <div class="row mb-3">
+                <label asp-for="Id" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input class="form-control-plaintext" readonly value="@ViewData["id"]" />
+                </div>
+            </div>
+
+            <!-- First Name -->
+            <div class="row mb-3">
+                <label asp-for="FirstName" class="col-sm-4 col-form-label">First Name <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="FirstName" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="row mb-3">
+                <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-sm-4 col-form-label">Email <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="row mb-3">
+                <label asp-for="PhoneNumber" class="col-sm-4 col-form-label">Phone Number <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="PhoneNumber" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="row mb-3">
+                <label asp-for="Address" class="col-sm-4 col-form-label">Address <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Address" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Department -->
+            <div class="row mb-3">
+                <label asp-for="Department" class="col-sm-4 col-form-label">Department <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Department" />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Position -->
+            <div class="row mb-3">
+                <label asp-for="Position" class="col-sm-4 col-form-label">Position <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Position" />
+                    <span asp-validation-for="Position" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="row mb-3">
+                <label asp-for="DateOfBirth" class="col-sm-4 col-form-label">Date of Birth <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="DateOfBirth" type="date" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Date of Joining -->
+            <div class="row mb-3">
+                <label asp-for="DateOfJoining" class="col-sm-4 col-form-label">Date of Joining <span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="DateOfJoining" type="date" />
+                    <span asp-validation-for="DateOfJoining" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Form buttons -->
+            <div class="row">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="Index" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

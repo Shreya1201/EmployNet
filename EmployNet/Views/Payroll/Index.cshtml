@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EmployNet.Models.Payroll>
+
+@{
+    ViewData["Title"] = "Payrolls";
+}
+
+<h2>Payrolls</h2>
+
+<div class="mb-3">
+    <!-- Button to navigate to the Create Payroll page -->
+    <a class="btn btn-primary" asp-action="Create">Create New Payroll</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <!-- Table headers for payroll details -->
+            <th>Employee Id</th>
+            <th>Base Salary</th>
+            <th>Bonus</th>
+            <th>Deductions</th>
+            <th>Total Pay</th>
+            <th>Pay Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payroll in Model)
+        {
+            <tr>
+                <!-- Display payroll details -->
+                <td>@payroll.EmployeeId</td>
+                <td>@payroll.BaseSalary.ToString("C")</td>
+                <td>@(payroll.Bonus?.ToString("C") ?? "Rs0.00")</td>
+                <td>@(payroll.Deductions?.ToString("C") ?? "Rs0.00")</td>
+                <td>@payroll.TotalPay.ToString("C")</td>
+                <td>@payroll.PayDate.ToShortDateString()</td>
+                <td>
+                    <!-- Links to Edit and Delete payroll -->
+                    <a asp-action="Edit" asp-route-id="@payroll.Id" class="btn btn-info">Edit</a>
+                    <form asp-controller="Payroll" asp-action="Delete" asp-route-id="@payroll.Id" method="post" class="d-inline">
+                        <!-- Confirm deletion action -->
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this payroll?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

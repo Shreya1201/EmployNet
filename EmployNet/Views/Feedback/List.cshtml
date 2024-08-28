@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EmployNet.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Feedback Submissions";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Feedback Submissions</h2>
+
+    <!-- Table for displaying feedback submissions -->
+    <table id="feedbackTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <!-- Column headers for the feedback table -->
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Rating</th>
+                <th>Message</th>
+                <th>Date Submitted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feedback in Model)
+            {
+                <tr>
+                    <!-- Displaying Name from feedback model -->
+                    <td>@feedback.Name</td>
+
+                    <!-- Displaying Email from feedback model -->
+                    <td>@feedback.Email</td>
+
+                    <!-- Displaying Subject from feedback model -->
+                    <td>@feedback.Subject</td>
+
+                    <!-- Displaying Rating from feedback model -->
+                    <td>@feedback.Rating</td>
+
+                    <!-- Displaying Message from feedback model -->
+                    <td>@feedback.Message</td>
+
+                    <!-- Displaying Date Submitted in yyyy-MM-dd HH:mm:ss format -->
+                    <td>@feedback.SubmittedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+
+                    <!-- Action button to view feedback details -->
+                    <td>
+                        <a href="@Url.Action("Details", new { id = feedback.Id })" class="btn btn-info btn-sm">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="container mt-5">
+        <!-- Centered Export Button for exporting feedback data to CSV -->
+        <div class="d-flex justify-content-center mb-3">
+            <a href="@Url.Action("ExportToCsv")" class="btn btn-success">Export to CSV</a>
+        </div>
+    </div>
+</div>
+
+<!-- DataTables Scripts and Styles for enhanced table functionality -->
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" />
+
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable with custom options
+        $('#feedbackTable').DataTable({
+            "responsive": true,        // Enable responsive design
+            "lengthChange": true,      // Allow user to change number of rows displayed
+            "autoWidth": false,        // Disable automatic column width adjustment
+            "pageLength": 10           // Set default number of rows per page
+        });
+    });
+</script>

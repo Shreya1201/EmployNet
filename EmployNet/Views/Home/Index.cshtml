@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Home Page";  // Setting the page title
+    var feedbackMessage = TempData["FeedbackMessage"] as string;  // Retrieving feedback message from TempData
+}
+
+<div class="container mt-3">
+    @if (!string.IsNullOrEmpty(feedbackMessage))
+    {
+        // Displaying feedback message if it exists
+        <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between align-items-center">
+            <span>@feedbackMessage</span>
+            <a class="btn btn-outline-danger" data-bs-dismiss="alert" asp-controller="Home" asp-action="Index" aria-label="Close">X</a>
+        </div>
+    }
+</div>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="container text-center my-5">
+        <h1 class="display-4 mb-4" style="font-weight:bold; text-decoration:underline; color: whitesmoke; margin-top:10%;">Welcome to EmployNet</h1>
+        <p class="lead mb-4">Your comprehensive solution for managing employee information and payroll.</p>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 h-100 d-flex flex-column">
+                    <div class="card-body text-center flex-grow-1" style="display:flex; flex-direction:column;">
+                        <h5 class="card-title" style="font-weight:700; text-decoration:underline; color: whitesmoke">Employee Management</h5>
+                        <p class="card-text">Efficiently manage employee records and update details.</p>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-info" href="/Identity/Account/Login">Manage Employees</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-info" href="#">Manage Employees</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 h-100 d-flex flex-column">
+                    <div class="card-body text-center flex-grow-1" style="display:flex; flex-direction:column;">
+                        <h5 class="card-title" style="font-weight:700; text-decoration:underline; color: whitesmoke">Payroll Management</h5>
+                        <p class="card-text">Handle payroll processing and manage salary details.</p>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-info" href="/Identity/Account/Login">Manage Payroll</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-info" href="#">Manage Payroll</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4 h-100 d-flex flex-column">
+                    <div class="card-body text-center flex-grow-1" style="display:flex; flex-direction:column;">
+                        <h5 class="card-title" style="font-weight:700; text-decoration:underline; color: whitesmoke">Leave Application</h5>
+                        <p class="card-text">This integrated system ensures a smooth and efficient leave management process.</p>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-info" href="/Identity/Account/Login">Manage Leaves</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-info" href="#">Manage Leaves</a> <!-- Added the actual link for authenticated users -->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    // Displaying different welcome messages based on the user's role
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="container text-center my-5">
+            <h1 class="display-4 mb-4" style="font-weight:bold; text-decoration:underline; color: whitesmoke; margin-top:10%;">Welcome Admin</h1>
+            <p class="lead mb-4">Your comprehensive solution for managing employees</p>
+        </div>
+    }
+    @if (User.IsInRole("Manager"))
+    {
+        <div class="container text-center my-5">
+            <h1 class="display-4 mb-4" style="font-weight:bold; text-decoration:underline; color: whitesmoke; margin-top:10%;">Welcome Manager</h1>
+            <p class="lead mb-4">Your comprehensive solution for managing Leaves</p>
+        </div>
+    }
+    @if (User.IsInRole("Finance"))
+    {
+        <div class="container text-center my-5">
+            <h1 class="display-4 mb-4" style="font-weight:bold; text-decoration:underline; color: whitesmoke; margin-top:10%;">Welcome to Finance Section</h1>
+            <p class="lead mb-4">Your comprehensive solution for managing Payrolls</p>
+        </div>
+    }
+    @if (User.IsInRole("User"))
+    {
+        <div class="container text-center my-5">
+            <h1 class="display-4 mb-4" style="font-weight:bold; text-decoration:underline; color: whitesmoke; margin-top:10%;">Welcome Employee</h1>
+            <p class="lead mb-4">This is your Space!</p>
+        </div>
+    }
+}

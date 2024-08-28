@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2">
+    <title>EmployNet</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!-- Font Awesome Icons for using various icons -->
+    <link rel="stylesheet" href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- overlayScrollbars for custom scrollbars -->
+    <link rel="stylesheet" href="~/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+    <!-- Theme style for AdminLTE -->
+    <link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css">
+</head>
+
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <!-- Brand/logo -->
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EmployNet</a>
+
+                    <!-- Navbar toggle button for mobile view -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navbar links -->
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <!-- Home link -->
+                            <li class="nav-item">
+                                <a class="nav-link text-info" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <!-- Conditional links based on user role -->
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Employee" asp-action="Index">Employee</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Feedback" asp-action="List">View Feedback</a>
+                                </li>
+
+                            }
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="ApproveLeave" asp-action="Index">Leave Requests</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Feedback" asp-action="Create">Feedback</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Finance"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Payroll" asp-action="Index">Payroll</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Feedback" asp-action="Create">Feedback</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("User"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="RequestLeave" asp-action="Create">Request Leave</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="RequestLeave" asp-action="Index">My Leave Requests</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Mypayroll" asp-action="Index">My Payroll</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-info" asp-area="" asp-controller="Feedback" asp-action="Create">Feedback</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-info" asp-area="" asp-controller="Contactus" asp-action="Index">Contact Us</a>
+                            </li>
+                        </ul>
+                        <!-- Partial view for login/logout and user profile -->
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content section -->
+        <section class="content">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </section>
+        <!-- End of main content -->
+    </div>
+    <!-- End of wrapper -->
+    <!-- Main Footer -->
+    <br />
+    <footer style="background:#232B2B; margin-top: 25%; padding:5px">
+        <strong>Copyright © @DateTime.Now.Year -> [Swanik, Shreya, Kunal] <a href="">Project</a>.</strong>
+        All rights reserved.
+    </footer>
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars JS -->
+    <script src="~/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App JS -->
+    <script src="~/AdminLTE/dist/js/adminlte.js"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael for interactive maps -->
+    <script src="~/AdminLTE/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="~/AdminLTE/plugins/raphael/raphael.min.js"></script>
+    <script src="~/AdminLTE/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="~/AdminLTE/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <!-- ChartJS for charts -->
+    <script src="~/AdminLTE/plugins/chart.js/Chart.min.js"></script>
+
+    <!-- AdminLTE demo scripts (only for demo purposes) -->
+    <script src="~/AdminLTE/dist/js/demo.js"></script>
+    <script src="~/AdminLTE/dist/js/pages/dashboard2.js"></script>
+
+    <!-- DataTables initialization -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+    <!-- Render additional scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

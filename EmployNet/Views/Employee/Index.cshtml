@@ -1,0 +1,64 @@
+﻿@using EmployNet.Data
+@model List<Employee>
+@{
+}
+
+<h2 class="text-center mb-5">List of Employees</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <!-- Button to register a new employee -->
+        <a class="btn btn-success" asp-controller="Employee" asp-action="Create">Register Employee</a>
+    </div>
+    <div class="col">
+        <!-- Empty column for layout purposes -->
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Position</th>
+            <th>Date of Birth</th>
+            <th>Date of Joining</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.Email</td>
+                <td>@employee.PhoneNumber</td>
+                <td>@employee.Address</td>
+                <td>@employee.Department</td>
+                <td>@employee.Position</td>
+                <td>@employee.DateOfBirth.ToString("d")</td>
+                <td>@employee.DateOfJoining.ToString("d")</td>
+                <td>
+                    <!-- Buttons for editing and deleting an employee -->
+                    <a class="btn btn-info btn-sm" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a>
+                    <form asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete('@employee.Id');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function confirmDelete(employeeId) {
+        return confirm('Are you sure you want to delete employee with ID ' + employeeId + '?');
+    }
+</script>

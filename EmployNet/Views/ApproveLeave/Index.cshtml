@@ -1,0 +1,75 @@
+﻿@model IEnumerable<EmployNet.Models.Leave>
+
+@{
+    ViewData["Title"] = "Pending Leave Requests";
+}
+
+<h2 class="text-center mb-5">Pending Leave Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Leave Type</th>
+            <th>Reason</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var leave in Model)
+        {
+            <tr>
+                <!-- Displaying Employee ID -->
+                <td>@leave.EmployeeId</td>
+
+                <!-- Displaying Employee Name -->
+                <td>@leave.EmployeeName</td>
+
+                <!-- Displaying Leave Type -->
+                <td>@leave.LeaveType</td>
+
+                <!-- Displaying Reason for Leave -->
+                <td>@leave.Reason</td>
+
+                <!-- Displaying Start Date in yyyy-MM-dd format -->
+                <td>@leave.StartDate.ToString("yyyy-MM-dd")</td>
+
+                <!-- Displaying End Date in yyyy-MM-dd format -->
+                <td>@leave.EndDate.ToString("yyyy-MM-dd")</td>
+
+                <!-- Displaying Current Status of Leave Request -->
+                <td>@leave.Status</td>
+
+                <td>
+                    <!-- Form to approve the leave request -->
+                    <form asp-action="Approve" method="post" style="display:inline;">
+                        <!-- Hidden input to pass the leave request ID -->
+                        <input type="hidden" name="id" value="@leave.Id" />
+                        <!-- Approve button -->
+                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                    </form>
+
+                    <!-- Form to reject the leave request -->
+                    <form asp-action="Reject" method="post" style="display:inline;">
+                        <!-- Hidden input to pass the leave request ID -->
+                        <input type="hidden" name="id" value="@leave.Id" />
+                        <!-- Reject button -->
+                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+        <!-- Display message if there are no pending leave requests -->
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="8" class="text-center">No pending leave requests.</td>
+            </tr>
+        }
+    </tbody>
+</table>

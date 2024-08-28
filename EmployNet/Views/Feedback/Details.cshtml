@@ -1,0 +1,36 @@
+﻿@model EmployNet.Models.Feedback
+
+@{
+    ViewData["Title"] = "Feedback Details";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Feedback Details</h2>
+
+    <!-- Definition list for displaying feedback details -->
+    <dl class="row">
+        <!-- Displaying the Name of the person who submitted the feedback -->
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <!-- Displaying the Email of the person who submitted the feedback -->
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <!-- Displaying the Subject of the feedback -->
+        <dt class="col-sm-3">Subject</dt>
+        <dd class="col-sm-9">@Model.Subject</dd>
+
+        <!-- Displaying the Rating given in the feedback -->
+        <dt class="col-sm-3">Rating</dt>
+        <dd class="col-sm-9">@Model.Rating</dd>
+
+        <!-- Displaying the Message or content of the feedback -->
+        <dt class="col-sm-3">Message</dt>
+        <dd class="col-sm-9">@Model.Message</dd>
+
+        <!-- Displaying the date and time when the feedback was submitted -->
+        <dt class="col-sm-3">Date Submitted</dt>
+        <dd class="col-sm-9">@Model.SubmittedAt.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+    </dl>
+</div>

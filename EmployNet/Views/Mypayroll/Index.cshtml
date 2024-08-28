@@ -1,0 +1,27 @@
+﻿@model IEnumerable<EmployNet.Models.Payroll>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pay Date</th>
+            <th>Base Salary</th>
+            <th>Bonus</th>
+            <th>Deductions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payroll in Model)
+        {
+            <tr>
+                <td>@payroll.PayDate.ToShortDateString()</td>
+                <td>@payroll.BaseSalary</td>
+                <td>@payroll.Bonus</td>
+                <td>@payroll.Deductions</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Download" asp-route-id="@payroll.Id">Download</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

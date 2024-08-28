@@ -1,0 +1,64 @@
+﻿@model EmployNet.Models.Feedback
+
+@{
+    ViewData["Title"] = "Submit Feedback";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Submit Feedback</h2>
+
+    <form asp-action="Create" method="post">
+        <!-- Name field -->
+        <div class="row mb-3">
+            <label asp-for="Name" class="col-sm-2 col-form-label">Name <span style="color: red;">*</span></label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Email field -->
+        <div class="row mb-3">
+            <label asp-for="Email" class="col-sm-2 col-form-label">Email <span style="color: red;">*</span></label>
+            <div class="col-sm-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Subject field -->
+        <div class="row mb-3">
+            <label asp-for="Subject" class="col-sm-2 col-form-label">Subject <span style="color: red;">*</span></label>
+            <div class="col-sm-10">
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Rating field -->
+        <div class="row mb-3">
+            <label asp-for="Rating" class="col-sm-2 col-form-label">Rating(1-5) <span style="color: red;">*</span></label>
+            <div class="col-sm-10">
+                <input asp-for="Rating" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Message field -->
+        <div class="row mb-3">
+            <label asp-for="Message" class="col-sm-2 col-form-label">Message <span style="color: red;">*</span></label>
+            <div class="col-sm-10">
+                <textarea asp-for="Message" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
